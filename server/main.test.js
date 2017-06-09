@@ -14,7 +14,7 @@ describe('message publications', function () {
     Message.insert({
       message: 'meteor homepage',
       createdAt: new Date(),
-       userId : Random.id()
+      userId : Random.id()
     });
   });
 
@@ -22,6 +22,7 @@ describe('message publications', function () {
     it('sends all message', function (done) {
       const collector = new PublicationCollector();
       collector.collect('message', (collections) => {
+        console.log(collections)
         assert.equal(collections.message.length, 1);
         done();
       });

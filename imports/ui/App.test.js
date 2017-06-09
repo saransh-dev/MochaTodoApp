@@ -14,7 +14,8 @@ import {remove} from '../api/tasks.js';
 
 if (Meteor.isClient) {
 	//  USING 3 TEST CASES
-    
+    let userId = Random.id();
+    Factory.define('message', Message,{ message: 'testing', userId:userId });
   describe('Client Side Process',()=>{
     let messageId = null;
     let header;
@@ -31,7 +32,6 @@ if (Meteor.isClient) {
     // CHECK INSERTATION
     describe('Insertation',()=>{
       beforeEach( ()=> {
-        Factory.define('message', Message,{ message: 'testing', userId:userId });
         const list =  Factory.create('message');
         messageId = list._id;
       });
@@ -46,7 +46,6 @@ if (Meteor.isClient) {
     describe('List Render',()=>{
       it('should list render',()=>{
         const item = mount(<App  />);
-        console.log(item.find('li').length)
         assert.equal(item.find('li').length,1);
       })
     })
